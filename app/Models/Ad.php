@@ -34,4 +34,10 @@ class Ad extends Model
         }
         return AdImage::storeFile($file,$this->id);
     }
+
+    public function jobs()
+    {
+        return $this->hasMany(AdHolderJob::class);
+    }
+
 }

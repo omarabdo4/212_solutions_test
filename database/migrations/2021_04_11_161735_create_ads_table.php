@@ -24,6 +24,9 @@ class CreateAdsTable extends Migration
             $table->unsignedBigInteger('views')->default(0);
             $table->foreignId('holder_id')->constrained('ad_holders');
             $table->boolean('published');
+            $table->timestamp('last_done')->nullable();
+            $table->timestamp('last_hold')->nullable();
+            $table->timestamp('last_processed')->nullable();
             $table->timestamps();
         });
     }

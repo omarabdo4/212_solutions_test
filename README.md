@@ -22,6 +22,7 @@ Steps :
 4- run the following commands 
 - "php artisan migrate --seed"
 - "php artisan serve"
+5- open a new terminal inside main project dir and run this command "php artisan schedule:work"
 
 
 ## Docker Setup
@@ -36,8 +37,8 @@ requirements :
 - "cp .sail.env.example .env"
 - "composer install"
 2- if required, edit .env file with your environment variables
-1- run the following command :
-- "./vendor/bin/sail up && ./vendor/bin/sail artisan migrate --seed"
+3- run the following command :
+- "./vendor/bin/sail up -d && ./vendor/bin/sail artisan migrate --seed && ./vendor/bin/sail artisan schedule:work"
 
 ## Usage 
 

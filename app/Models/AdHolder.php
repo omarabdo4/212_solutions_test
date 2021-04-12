@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class AdHolder extends Model
 {
     use HasFactory;
+
+    public function jobs()
+    {
+        return $this->hasMany(AdHolderJob::class,'holder_id');
+    }
 }

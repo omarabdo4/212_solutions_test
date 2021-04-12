@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\AdHolderJob;
 
 class HomeController extends Controller
 {
@@ -13,7 +14,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        // $this->middleware('auth');
     }
 
     /**
@@ -23,6 +24,18 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $jobs = AdHolderJob::where('stage',1)->with('ad.image')->get();
+        
+        foreach ($jobs as $job) {
+            $ad = $job->ad;
+            $ad->views++;
+            $ad->save(); 
+        }
+
+
+        return view('welcome',[
+            'jobs' => $jobs
+        ]);
+        // return view('home');
     }
 }

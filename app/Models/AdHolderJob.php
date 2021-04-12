@@ -8,4 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class AdHolderJob extends Model
 {
     use HasFactory;
+
+    public function ad()
+    {
+        return $this->belongsTo(Ad::class);
+    }
+
 }

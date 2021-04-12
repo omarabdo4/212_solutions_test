@@ -18,21 +18,24 @@
         </div>
     </div>
 
-    @forelse ($ads as $ad)
-        <div class="row">
-            <div class="card col-sm-12 col-md-6">
-                <img src="{{$ad->image->getUrl()}}" class="card-img-top" alt="{{$ad->title}} Image">
-                <div class="card-body">
-                    <h5 class="card-title">{{$ad->title}}</h5>
-                    <p class="card-text">{{$ad->desc}}</p>
-                </div>
-                <div class="card-body">
-                    <a href="#" class="card-link">Edit </a>
-                    <a href="#" class="card-link">Delete</a>
+    <div class="row">
+            @forelse ($ads as $ad)
+            <div class="col-sm-12 col-md-6 my-2">
+                <div class="card">
+                    <img src="{{$ad->image->getUrl()}}" class="card-img-top" style="max-height: 400px" alt="{{$ad->title}} Image">
+                    <div class="card-body">
+                        <h5 class="card-title">{{$ad->title}}</h5>
+                        <p class="muted-text">views {{$ad->views}}</p>
+                        <p class="card-text">{{$ad->desc}}</p>
+                    </div>
+                    <div class="card-body">
+                        <a href="#" class="card-link">Edit </a>
+                        <a href="#" class="card-link">Delete</a>
+                    </div>
                 </div>
             </div>
-        </div>
-    @empty
-        <h2>no ads</h2>
-    @endforelse
+            @empty
+            <h2>no ads</h2>
+            @endforelse
+    </div>
 @endsection

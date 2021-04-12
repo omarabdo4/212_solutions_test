@@ -5,6 +5,10 @@ namespace App\Console;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
+use App\Tasks\AdPublicationTask;
+use App\Tasks\AdEnqueueFrequencyTask;
+use App\Tasks\AdDequeueDurationTask;
+
 class Kernel extends ConsoleKernel
 {
     /**
@@ -24,7 +28,9 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')->hourly();
+        $schedule->call(new AdDequeueDurationTask)->everyMinute();
+        $schedule->call(new AdEnqueueFrequencyTask)->everyMinute();
+        $schedule->call(new AdPublicationTask)->daily();
     }
 
     /**
