@@ -22,4 +22,9 @@ class AdImage extends Model
         return FileHelper::storeFile($uploadedFile,(new self),$model_id_column,$related_id);
     }
 
+    public function delete_actual_file()
+    {
+        return FileHelper::delete_actual_file($this);
+    }
+
 }
