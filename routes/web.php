@@ -25,8 +25,11 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/', function (){
-        return redirect()->route('admin.ads.list');
+        return redirect()->route('admin.ads.index');
     })->name('home');
-    Route::get('ads', [AdminAdController::class, 'index'])->name('ads.list');
-    Route::get('ads/create', [AdminAdController::class, 'create'])->name('ads.create');
+    Route::prefix('ads')->name('ads.')->group(function () {        
+        Route::get('/', [AdminAdController::class, 'index'])->name('index');
+        Route::get('/create', [AdminAdController::class, 'create'])->name('create');
+        Route::post('/', [AdminAdController::class, 'store'])->name('store');
+    });
 });

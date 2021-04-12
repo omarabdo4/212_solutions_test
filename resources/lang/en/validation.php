@@ -150,6 +150,9 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => [
+        'image' => 'file',
+        'desc' => 'description'
+    ],
 
 ];

@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Ad;
+use App\Models\AdHolder;
 use Illuminate\Http\Request;
+use App\Http\Requests\StoreAdRequest;
 
 class AdController extends Controller
 {
@@ -15,7 +17,9 @@ class AdController extends Controller
      */
     public function index()
     {
-        return view('ads.index');
+        return view('ads.index',[
+            'ads' => Ad::paginate()
+        ]);
     }
 
     /**
@@ -25,18 +29,45 @@ class AdController extends Controller
      */
     public function create()
     {
-        return view('ads.create');
+        return view('ads.create',[
+            'holders' => AdHolder::all()
+        ]);
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\StoreAdRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreAdRequest $request)
     {
-        //
+        $date_from = new \DateTime($request->date_from);
+        $date_to = new \DateTime($request->date_to);
+        $current_date = new \DateTime("now");
+
+        if($date_from < $current_date and $date_to > $current_date){
+            $request->merge([
+                'published' => 1
+            ]);    
+        }else{
+            $request->merge([
+                'published' => 0
+            ]);
+        }
+
+        // unify frequency types to be minutes
+        if($request->frequency_type == "h"){
+            $request->merge([
+                'frequency' => $request->frequency * 60
+            ]);
+        }
+
+
+        $ad = Ad::create($request->all());
+        $ad->set_image($request->image);
+
+        return redirect()->route('admin.ads.index')->with('status','the new ad is added successfully');
     }
 
     /**

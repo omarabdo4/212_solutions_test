@@ -2,7 +2,7 @@
   <div class="position-sticky pt-3">
     <ul class="nav flex-column">
       <li class="nav-item">
-        <a class="nav-link {{ Request::segment(2)=="ads" ? "active" : "" }}" aria-current="page" href="{{route('admin.ads.list')}}">
+        <a class="nav-link {{ Request::segment(2)=="ads" ? "active" : "" }}" aria-current="page" href="{{route('admin.ads.index')}}">
           <span data-feather="file"></span>
           Ads
         </a>
