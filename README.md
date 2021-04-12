@@ -22,6 +22,7 @@ Steps :
 4- run the following commands 
 - "php artisan migrate --seed"
 - "php artisan serve"
+- 
 5- open a new terminal inside main project dir and run this command "php artisan schedule:work"
 
 
